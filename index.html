@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="nav">
+        <div class="task">
+          <h1>Task</h1>
+          <span>List</span>
+        </div>
+        <div class="addbutton">
+          <button id="add">+</button>
+          <h2>Add Item</h2>
+        </div>
+      </div>
+      <div id="card-container"></div>
+    </div>
+
+    <div class="popup-container">
+      <div class="addtask">
+        <h2>Add New Task</h2>
+        <input type="text" name="" id="addtext" placeholder="Add new Task" />
+        <button id="addbtn" class="btn btn-primary" onclick="handleAddCard()">
+          Add
+        </button>
+        <button id="closebtn" onclick="closeAddCardPopup()">Close</button>
+      </div>
+    </div>
+    <div id="card-container"></div>
+
+    <div class="popup-container" id="popup2">
+      <div class="addtask">
+        <h2>Add new item in Card</h2>
+        <input
+          type="text"
+          name=""
+          id="card-content-input"
+          placeholder="Add new Task"
+        />
+        <button id="" onclick="addContentToCard()">Add</button>
+        <button id="" onclick="removeAddContentToCardPopup()">Close</button>
+      </div>
+    </div>
+    <div class="render1Card">
+      <div></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
