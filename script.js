@@ -1,10 +1,10 @@
-let data = []
+let data = [];
+console.log("aiiwej", data);
 let cardId;
-
 let popup = document.getElementsByClassName("popup-container");
 let add = document.getElementById("add");
 let blur = document.getElementsByClassName("main");
-
+let blurpage2 = document.getElementsByClassName("render1Card");
 add.addEventListener("click", () => {
   console.log("plus button run succesful");
   popup[0].setAttribute("style", "display:flex");
@@ -31,10 +31,12 @@ function deleteCard(id) {
 }
 
 function showAddContentToCardPopup(id) {
+  blurpage2[0].classList.add("blur");
   blur[0].classList.add("blur");
   const popup2 = document.getElementById("popup2");
   popup2.style.display = "flex";
   cardId = id;
+  console.log("showAddContentToCardPopup");
 }
 
 let addtext = document.getElementById("addtext");
@@ -55,6 +57,7 @@ function handleAddCard() {
   }
   document.getElementById("addtext").value = "";
   closeAddCardPopup();
+  console.log("handleAddCard");
 }
 function renderContent() {
   for (let i = 0; i < data.length; i++) {
@@ -62,19 +65,24 @@ function renderContent() {
     let child = "";
     for (let j = 0; j < data[i].content.length; j++) {
       const content = data[i].content[j];
-      console.log(content.id, "content id");
-      child += `<li class="${content.done ? 'checked':''}" id="content_${content.id}" onclick="doneTask(${content.id},${data[i].id}">${content.contentText}</li>`;
+      child += `<li class="${content.done ? "checked" : ""}" id="content_${
+        content.id
+      }" onclick="doneTask(${content.id},${data[i].id}">${
+        content.contentText
+      }</li>`;
     }
     ulElement.innerHTML = child;
   }
+  console.log("renderContent");
 }
 function renderCards() {
+  console.log("renderCards");
   const cardcontainer = document.getElementById("card-container");
   let child = "";
   for (let i = 0; i < data.length; i++) {
     console.log("data[i]:", data[i]);
     child += `<div id="card_${data[i].id}" class="card">
-        <h3 class="p2">${data[i].cardTitle}</h3>
+        <h3 onclick="render1Cards(${data[i].id})">${data[i].cardTitle}</h3>
         <hr>
         <div class="ul">
           <ul  id="content_list_${data[i].id}">
@@ -93,11 +101,15 @@ function renderCards() {
 
 function removeAddContentToCardPopup() {
   blur[0].classList.remove("blur");
+  blurpage2[0].classList.remove("blur");
   const popup2 = document.getElementById("popup2");
   popup2.style.display = "none";
+  console.log("removeAddContentToCardPopup");
 }
 
 function addContentToCard() {
+  console.log("addContentToCard");
+  blurpage2[0].classList.remove("blur");
   const contentListId = `content_list_${cardId}`;
   const Ul = document.getElementById(contentListId);
   const contentText = document.getElementById("card-content-input").value;
@@ -117,11 +129,11 @@ function addContentToCard() {
     removeAddContentToCardPopup();
     for (let i = 0; i < data.length; i++) {
       // console.log("inside for loop")
-      console.log("data id", data[i].id, "cardId", cardId);
+      // console.log("data id", data[i].id, "cardId", cardId);
       if (data[i].id == cardId) {
         // console.log("inside if condition");
         let content = {
-          id: new Date().getTime().toString(),
+          id: listId,
           contentText: contentText,
           done: false,
         };
@@ -139,13 +151,73 @@ function doneTask(listId, cardId) {
     if (data[i].id == cardId) {
       for (let j = 0; j < data[i].content.length; j++) {
         const content = data[i].content[j];
-        console.log(data[i].content[j].id, "jdofnnasoi",listId);
+        console.log(data[i].content[j].id, "id", listId);
         if (content.id == listId) {
           console.log("if condition");
-          data[i].content[j].done = true;
+          data[i].content[j].done = !data[i].content[j].done;
         }
       }
     }
   }
   console.log(data);
+}
+
+function show1Cards(cardId) {
+  let cardcontainer = document.getElementsByClassName("cardContainer");
+  let title = document.getElementById("cardTitle");
+  let child = "";
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id == cardId) {
+      console.log("data[i]:", data[i]);
+      // renderCards()
+      const cardTitle = data[i].cardTitle;
+      title.innerText = cardTitle;
+      console.log("cardtitle", cardTitle);
+      child += `<div id="card_${data[i].id}" class="card">
+        <h3 onclick="render1Cards(${data[i].id})">${data[i].cardTitle}</h3>
+        <hr>
+        <div class="ul">
+          <ul  id="content_list_${data[i].id}">
+              
+          </ul>
+        </div>
+        <div class="container2">
+        <Button onclick="deleteCard(${data[i].id})" class="delete">Delete</Button>
+        <Button onclick="showAddContentToCardPopup(${data[i].id})" class="add">Add</Button>
+        </div>
+        </div>`;
+
+      cardcontainer[0].innerHTML = child;
+
+      const ulElement = document.getElementById(`content_list_${data[i].id}`);
+      console.log('ulelement',ulElement)
+      let lichild = "";
+      for (let j = 0; j < data[i].content.length; j++) {
+        const content = data[i].content[j];
+        lichild += `<li class="${content.done ? "checked" : ""}" id="content_${
+          content.id
+        }" onclick="doneTask(${content.id},${data[i].id}">${
+          content.contentText
+        }</li>`;
+      }
+      ulElement.innerHTML = lichild;
+    }
+  }
+}
+let page2 = document.getElementById("page2");
+let cardcontainer = document.getElementById("card-container");
+let main = document.getElementsByClassName("main");
+
+function render1Cards(cardId) {
+  main[0].setAttribute("style", "display:none");
+  cardContainer.setAttribute("style", "display:none");
+  page2.setAttribute("style", "display:block");
+  show1Cards(cardId)
+  // renderCards;
+}
+
+function backToHome() {
+  main[0].setAttribute("style", "display:block");
+  cardContainer.setAttribute("style", "display:flex");
+  page2.setAttribute("style", "display:none");
 }

@@ -4,39 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO APP</title>
     <link rel="stylesheet" href="./style.css" />
+
+    <title>Document</title>
   </head>
   <body>
-    <div class="parent">
-      <span class="a1" id="head">
-        <b class="task">Tasks</b> <span class="list"> List </span></span
-      >
-
-      
-      <div class="b1" id="addbtn1">
-        <button onclick="callme()" class="plus">+</button>
-        <span class="items" onclick="callme()"> Add items</span>   
-       </div>
-       <div class="cardHeading"></div>
-       <button id="back" onclick="backToAll()">Back</button>
-       <div id="card-container"></div>
-
-
-       <div class="popup2" id="popup2">
-        <span class="c1">Add New List</span>
-        <input type="text"  id="inputtext2"/> 
-      <span  id="k99">
-        <button id="bb90" onclick= 'AddContentToCard()'>Add</button> 
-        <button id="bb91" onclick="cloceme()">Close</button> 
-      </span>
+    <div class="main">
+      <div class="nav">
+        <div class="task">
+          <h1>Task</h1>
+          <span>List</span>
         </div>
+        <div class="addbutton">
+          <button id="add">+</button>
+          <h2>Add Item</h2>
+        </div>
+      </div>
+      <div id="card-container"></div>
+    </div>
 
-      
+    <div class="popup-container">
+      <div class="addtask">
+        <h2>Add New Task</h2>
+        <input type="text" name="" id="addtext" placeholder="Add new Task" />
+        <button id="addbtn" class="btn btn-primary" onclick="handleAddCard()">
+          Add
+        </button>
+        <button id="closebtn" onclick="closeAddCardPopup()">Close</button>
+      </div>
+    </div>
+    <!-- <div id="card-container"></div> -->
 
-    
-    
+    <div class="popup-container" id="popup2">
+      <div class="addtask">
+        <h2>Add new item in Card</h2>
+        <input
+          type="text"
+          name=""
+          id="card-content-input"
+          placeholder="Add new Task"
+        />
+        <button id="" onclick="addContentToCard()">Add</button>
+        <button id="" onclick="removeAddContentToCardPopup()">Close</button>
+      </div>
+    </div>
+    <div class="render1Card" id="page2">
+      <div class="nav">
+        <div class="task">
+            <button id="back" onclick="backToHome()">Back</button>
+        </div>
+        <div class="addbutton">
+          <button id="addPopUp">+</button>
+        </div>
+      </div>
+      <h1 id="cardTitle">card title here</h1>
+      <div class="cardContainer">
 
-    <script src="./index.js"></script>
+      </div>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
