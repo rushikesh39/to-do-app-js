@@ -72,6 +72,7 @@ body{
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 50px;
+    /* border: 2px solid white; */
     /* background-color: wheat; */
 }
 .card{

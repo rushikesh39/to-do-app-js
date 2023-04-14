@@ -166,41 +166,19 @@ function show1Cards(cardId) {
   let cardcontainer = document.getElementsByClassName("cardContainer");
   let title = document.getElementById("cardTitle");
   let child = "";
+  let count=0;
   for (let i = 0; i < data.length; i++) {
     if (data[i].id == cardId) {
+      ++count;
+      console.log(count,"count")
       console.log("data[i]:", data[i]);
-      // renderCards()
       const cardTitle = data[i].cardTitle;
       title.innerText = cardTitle;
-      console.log("cardtitle", cardTitle);
-      child += `<div id="card_${data[i].id}" class="card">
-        <h3 onclick="render1Cards(${data[i].id})">${data[i].cardTitle}</h3>
-        <hr>
-        <div class="ul">
-          <ul  id="content_list_${data[i].id}">
-              
-          </ul>
-        </div>
-        <div class="container2">
-        <Button onclick="deleteCard(${data[i].id})" class="delete">Delete</Button>
-        <Button onclick="showAddContentToCardPopup(${data[i].id})" class="add">Add</Button>
-        </div>
-        </div>`;
-
-      cardcontainer[0].innerHTML = child;
-
-      const ulElement = document.getElementById(`content_list_${data[i].id}`);
-      console.log('ulelement',ulElement)
-      let lichild = "";
-      for (let j = 0; j < data[i].content.length; j++) {
-        const content = data[i].content[j];
-        lichild += `<li class="${content.done ? "checked" : ""}" id="content_${
-          content.id
-        }" onclick="doneTask(${content.id},${data[i].id}">${
-          content.contentText
-        }</li>`;
-      }
-      ulElement.innerHTML = lichild;
+      let card=document.getElementById(`card_${cardId}`);
+      console.log("card id",card)
+      // let txt="owhghawhgawhghegu";
+      cardcontainer[0].appendChild(card)
+      console.log(cardContainer,"cardcontainer")
     }
   }
 }
@@ -210,14 +188,17 @@ let main = document.getElementsByClassName("main");
 
 function render1Cards(cardId) {
   main[0].setAttribute("style", "display:none");
-  cardContainer.setAttribute("style", "display:none");
+  // cardContainer.setAttribute("style", "display:none");
   page2.setAttribute("style", "display:block");
   show1Cards(cardId)
   // renderCards;
 }
-
 function backToHome() {
   main[0].setAttribute("style", "display:block");
-  cardContainer.setAttribute("style", "display:flex");
+  // cardContainer.setAttribute("style", "display:flex");
   page2.setAttribute("style", "display:none");
+
+  let removePage2Card = document.getElementsByClassName("cardContainer");
+  removePage2Card[0].innerText="";
+  renderCards();
 }
